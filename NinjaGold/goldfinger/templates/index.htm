@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/goldfinger.css' %}"> 
+<title>Ninja Money</title>
+
+</head>
+<body>
+    <h1>WELCOME TO NINJA GOLD</h1>
+    <h2>Your Gold: {{request.session.total_gold}}</h2>
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <h4>
+        Farm 
+        <br>
+        10 - 20 GOLD
+        <input type="hidden" name="building" value="farm" />
+        <br>
+        <input type="submit" value="Find Gold!">
+        </h4>
+        
+    </form>
+    <br>
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <h4>
+        Cave 
+        <br> 
+        5 - 10 GOLD
+        <br>
+        <input type="hidden" name="building" value="cave" />
+        <br>
+        <input type="submit" value="Find Gold!">
+        </h4>
+    </form>
+    <br>
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+        <h4>
+        House 
+        <br>
+        2 - 5 GOLD
+        <br>
+        <input type="hidden" name="building" value="house" />
+        <br>
+        <input type="submit" value="Find Gold!">
+        </h4>
+    </form>
+    <br>
+    <form action="/process_money" method="POST">
+        {% csrf_token %}
+            <h4>
+            Casino 
+            <br>
+            Earn/Lose 0 - 50 GOLD
+            <br>
+            <input type="hidden" name="building" value="casino" />
+            <br>
+            <input type="submit" value="Find Gold!">
+            </h4>
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form action="/reset" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Play Again">
+    </form>
+    
+    <br>
+    <br>
+        <h3>Activities:</h3>
+            {% for log in request.session.activities reversed %}
+            {% if "lost" in log %}
+                <h4>{{ log }}</h4>
+            {% else %}
+                <h4>{{ log }}</h4>
+            {% endif %}
+            {% endfor %}
+    </div>
+</body>
+</html>
